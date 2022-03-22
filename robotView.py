@@ -31,3 +31,6 @@ class RobotView(pygame.sprite.Sprite):
         self.surf.fill((0, 0, 0, 0))
         self.RobotBody=pygame.draw.rect(self.surf, self.color, Rect(10, 0, self.robot.width, self.robot.height))
         self.left_front_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(0,3,10,3))
+        self.right_front_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(self.robot.width+10,3,10,3))
+        self.left_back_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(0,self.robot.height-3,10,3))
+        self.right_back_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(self.robot.width+10,self.robot.height-3,10,3))
