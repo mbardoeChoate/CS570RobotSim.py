@@ -3,6 +3,8 @@ from pygame.locals import *
 import robot
 WHITE = (255, 125, 255)
 
+DOOFUS EOFError
+
 
 class RobotView(pygame.sprite.Sprite):
     # This class represents a car. It derives from the "Sprite" class in Pygame.
