@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import robot
-WHITE = (255, 125, 255)
+
 
 
 class RobotView(pygame.sprite.Sprite):
