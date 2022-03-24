@@ -13,7 +13,7 @@ screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 background = pygame.Surface(screen.get_size())
 background.fill((255, 255, 255))
-my_robot=robot.Robot(20,20,0,(100,100))
+my_robot=robot.Robot(40,40,1,(200,100))
 my_robotView=robotView.RobotView(screen, (255,125,255),my_robot )
 running = True
 
