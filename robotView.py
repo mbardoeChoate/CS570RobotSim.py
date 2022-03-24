@@ -1,3 +1,5 @@
+import math
+from unum.units import cm
 import pygame
 from pygame.locals import *
 import robot
@@ -34,3 +36,4 @@ class RobotView(pygame.sprite.Sprite):
         self.right_front_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(self.robot.width+10,3,10,3))
         self.left_back_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(0,self.robot.height-3,10,3))
         self.right_back_wheel=pygame.draw.rect(self.surf, (0,255,0), Rect(self.robot.width+10,self.robot.height-3,10,3))
+        self.surf=pygame.transform.rotate(self.surf, self.robot.direction*180.0/math.pi)
