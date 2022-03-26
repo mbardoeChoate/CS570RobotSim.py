@@ -4,12 +4,6 @@ from src.robots.robotviews import robotView
 from src.etc.eventhandler import EventHandler
 
 
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
 class Main:
 
     def __init__(self):
@@ -35,22 +29,21 @@ class Main:
         self.my_robot = robot.Robot(40, 40, 1, (200, 100))
         self.my_robotView = robotView.RobotView(self.screen, (255, 125, 255), self.my_robot)
 
+    def update_screen(self):
+        self.screen.blit(self.background, (0, 0))
+        self.my_robotView.create_Image()
+        # rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
+        self.screen.blit(self.my_robotView.surf,
+                         self.my_robotView.surf.get_rect(center=self.my_robot.center_position))
+
     def run(self):
         while self.running:
             for event in pygame.event.get():
                 self.eventhandler.handle_event(event)
-
-            self.screen.blit(self.background, (0, 0))
-            self.my_robotView.create_Image()
-            # rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
-            self.screen.blit(self.my_robotView.surf,
-                             self.my_robotView.surf.get_rect(center=self.my_robot.center_position))
-            self.my_robot.run()
-            # Flip the display
-            pygame.display.flip()
-
-        # Done! Time to quit.
-        pygame.quit()
+            self.update_screen()  # update the sreen
+            pygame.display.flip()  # Flip the display
+            self.my_robot.run()  # move the game forward
+        pygame.quit()  # Done! Time to quit.
 
 
 if __name__ == "__main__":
