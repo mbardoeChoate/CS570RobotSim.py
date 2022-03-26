@@ -16,15 +16,24 @@ class Main:
         pygame.init()
         self.screen_width = 800
         self.screen_height = 600
-        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
-        pygame.display.set_caption("CS570 Robot Sim")
-        self.background = pygame.Surface(self.screen.get_size())
-        self.background.fill((255, 255, 255))
-        self.my_robot = robot.Robot(40, 40, 1, (200, 100))
-        self.my_robotView = robotView.RobotView(self.screen, (255, 125, 255), self.my_robot)
         self.running = True
         self.eventhandler = EventHandler(self)
+        self.create_display()
+        self.draw_background()
+        self.add_robot()
         self.run()
+
+    def create_display(self):
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
+        pygame.display.set_caption("CS570 Robot Sim")
+
+    def draw_background(self):
+        self.background = pygame.Surface(self.screen.get_size())
+        self.background.fill((255, 255, 255))
+
+    def add_robot(self):
+        self.my_robot = robot.Robot(40, 40, 1, (200, 100))
+        self.my_robotView = robotView.RobotView(self.screen, (255, 125, 255), self.my_robot)
 
     def run(self):
         while self.running:
