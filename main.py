@@ -1,34 +1,48 @@
 import pygame
-import robot, robotView
+import robot
+import robotView
+from eventhandler import EventHandler
+
+
 # This is a sample Python script.
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
-pygame.init()
 
-screen_width = 800
-screen_height = 600
+class Main:
 
-screen = pygame.display.set_mode((screen_width, screen_height))
-background = pygame.Surface(screen.get_size())
-background.fill((255, 255, 255))
-my_robot=robot.Robot(40,40,1,(200,100))
-my_robotView=robotView.RobotView(screen, (255,125,255),my_robot )
-running = True
+    def __init__(self):
+        pygame.init()
+        self.screen_width = 800
+        self.screen_height = 600
+        self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))
+        pygame.display.set_caption("CS570 Robot Sim")
+        self.background = pygame.Surface(self.screen.get_size())
+        self.background.fill((255, 255, 255))
+        self.my_robot = robot.Robot(40, 40, 1, (200, 100))
+        self.my_robotView = robotView.RobotView(self.screen, (255, 125, 255), self.my_robot)
+        self.running = True
+        self.eventhandler = EventHandler(self)
+        self.run()
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    def run(self):
+        while self.running:
+            for event in pygame.event.get():
+                self.eventhandler.handle_event(event)
 
-    screen.blit(background, (0, 0))
-    my_robotView.create_Image()
-    #rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
-    screen.blit(my_robotView.surf, my_robotView.surf.get_rect(center = my_robot.center_position))
-    my_robot.run()
-    # Flip the display
-    pygame.display.flip()
+            self.screen.blit(self.background, (0, 0))
+            self.my_robotView.create_Image()
+            # rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
+            self.screen.blit(self.my_robotView.surf,
+                             self.my_robotView.surf.get_rect(center=self.my_robot.center_position))
+            self.my_robot.run()
+            # Flip the display
+            pygame.display.flip()
 
-# Done! Time to quit.
-pygame.quit()
+        # Done! Time to quit.
+        pygame.quit()
+
+
+if __name__ == "__main__":
+    main = Main()
