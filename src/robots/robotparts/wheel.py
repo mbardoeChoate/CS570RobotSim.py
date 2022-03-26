@@ -1,5 +1,5 @@
 
-from motor import Motor
+from src.robots.robotparts.motor import Motor
 
 class Wheel(object):
 
