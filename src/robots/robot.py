@@ -1,4 +1,4 @@
-from wheel import Wheel
+from src.robots.robotparts.wheel import Wheel
 from unum.units import cm
 class Robot(object):
 

@@ -1,10 +1,7 @@
 import math
-from unum.units import cm
 import pygame
 from pygame.locals import *
-from constants import my_px
-import robot
-
+from src.etc.constants import my_px
 
 
 class RobotView(pygame.sprite.Sprite):

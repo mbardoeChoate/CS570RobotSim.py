@@ -1,7 +1,7 @@
 import pygame
-import robot
-import robotView
-from eventhandler import EventHandler
+from src.robots import robot
+from src.robots.robotviews import robotView
+from src.etc.eventhandler import EventHandler
 
 
 # This is a sample Python script.
