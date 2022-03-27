@@ -7,15 +7,21 @@ class Robot(object):
         self.width = width * cm
         self.height = height * cm
         self.direction = direction  # direction in radians 0 is up
-        self.center_position = position
+        self.center_position = (position[0] * cm, position[1] * cm)
         self.left_front_wheel = Wheel(4)
         self.left_back_wheel = Wheel(4)
         self.right_front_wheel = Wheel(4)
         self.right_back_wheel = Wheel(4)
         self.drivetrain = None
 
+    def add_drivetrain(self, drivetrain):
+        self.drivetrain = drivetrain
+
     def set_motor_voltage(self, motor_num, value):
         self.drivetrain.motors[motor_num].set_voltage(value)
+
+    def get_surface_position(self):
+        return (self.center_position[0].asNumber(cm), self.center_position[1].asNumber(cm))
 
     def run(self):
         '''You must create a drivetrain.'''
