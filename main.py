@@ -29,6 +29,8 @@ class Main:
 
     def add_robot(self):
         self.my_robot = tankrobot.TankRobot(40, 40, 1, (200, 100))
+        self.my_robot.set_motor_voltage(0, 0.42)
+        self.my_robot.set_motor_voltage(1, 0.45)
         self.my_robotView = robotView.RobotView(self.screen, (255, 125, 255), self.my_robot)
 
     def update_screen(self):
@@ -36,7 +38,7 @@ class Main:
         self.my_robotView.create_Image()
         # rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
         self.screen.blit(self.my_robotView.surf,
-                         self.my_robotView.surf.get_rect(center=self.my_robot.center_position))
+                         self.my_robotView.surf.get_rect(center=self.my_robot.get_surface_position()))
 
     def run(self):
         self.clock = pygame.time.Clock()
