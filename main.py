@@ -1,5 +1,6 @@
 import pygame
 from src.robots import robot
+from src.robots import tankrobot
 from src.robots.robotviews import robotView
 from src.etc.eventhandler import EventHandler
 
@@ -11,6 +12,7 @@ class Main:
         self.screen_width = 800
         self.screen_height = 600
         self.running = True
+        self.fps = 50  # because the robot updates every 0.02 seconds
         self.eventhandler = EventHandler(self)
         self.create_display()
         self.draw_background()
@@ -26,7 +28,7 @@ class Main:
         self.background.fill((255, 255, 255))
 
     def add_robot(self):
-        self.my_robot = robot.Robot(40, 40, 1, (200, 100))
+        self.my_robot = tankrobot.TankRobot(40, 40, 1, (200, 100))
         self.my_robotView = robotView.RobotView(self.screen, (255, 125, 255), self.my_robot)
 
     def update_screen(self):
@@ -37,7 +39,9 @@ class Main:
                          self.my_robotView.surf.get_rect(center=self.my_robot.center_position))
 
     def run(self):
+        self.clock = pygame.time.Clock()
         while self.running:
+            self.clock.tick(self.fps)
             for event in pygame.event.get():
                 self.eventhandler.handle_event(event)
             self.update_screen()  # update the sreen

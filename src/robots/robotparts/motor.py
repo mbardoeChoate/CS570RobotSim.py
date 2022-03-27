@@ -1,16 +1,16 @@
-
+from unum.units import s
 class Motor(object):
 
     def __init__(self):
-        self.encoder_per_rev =255
-        self.encoder=0
-        self.voltage=0
-        self.gearing=255 # how many revolutions at max voltage
+        self.encoder_per_rev = 256
+        self.encoder = 0
+        self.voltage = 0
+        self.gearing = 256  # how many revolutions at max voltage
 
-    def set_Voltage(self,voltage):
-        self.voltage=max(0,min(1,voltage)) # keep between 0 and 1
+    def set_voltage(self, voltage):
+        self.voltage = max(0, min(1, voltage))  # keep between 0 and 1
 
-    def run(self,dt):
-        revolutions=self.voltage*self.gearing*dt
-        self.encoder+= self.encoder_per_rev * revolutions
-        return revolutions
+    def revolutions(self):
+        revolutions = self.voltage * self.gearing
+        self.encoder += self.encoder_per_rev * revolutions
+        return revolutions * 1 / s
