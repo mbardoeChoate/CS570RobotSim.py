@@ -8,7 +8,7 @@ class Motor(object):
         self.gearing = 72  # how many revolutions at max voltage
 
     def set_voltage(self, voltage):
-        self.voltage = max(0, min(1, voltage))  # keep between 0 and 1
+        self.voltage = max(-1, min(1, voltage))  # keep between 0 and 1
 
     def revolutions(self):
         revolutions = self.voltage * self.gearing
