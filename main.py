@@ -17,14 +17,15 @@ class Main:
         # self.screen_height = 600
         self.screen_width = WIDTH_2022
         self.screen_height = HEIGHT_2022
+        self.screen = pygame.display.set_mode([self.screen_width, self.screen_height])
         self.running = True
-        # self.field=Field_2022()
-        self.field = Field(1700, 850, 1700.0 / 648.0 * 2.54)
+        self.field = Field_2022()
+        # self.field = Field(1700, 850, 1700.0 / 648.0 * 2.54)
         self.fps = FPS  # because the robot updates every 0.02 seconds
         self.eventhandler = EventHandler(self)
         # self.create_display()
         self.draw_background()
-        # self.add_robot()
+        self.add_robot()
         self.run()
 
     #    def create_display(self):
@@ -43,11 +44,11 @@ class Main:
         self.my_robotView = robotView.RobotView(self.field.screen, (255, 125, 255), self.my_robot)
 
     def update_screen(self):
-        self.field.screen.blit(self.field.screen, (0, 0))
-        # self.my_robotView.create_Image()
+        self.screen.blit(self.field.screen, (0, 0))
+        self.my_robotView.create_Image()
         # rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
-        # self.screen.blit(self.my_robotView.surf,
-        #                 self.my_robotView.surf.get_rect(center=self.my_robot.get_surface_position()))
+        self.screen.blit(self.my_robotView.surf,
+                         self.my_robotView.surf.get_rect(center=self.my_robot.get_surface_position()))
 
     def run(self):
         self.clock = pygame.time.Clock()
@@ -57,7 +58,7 @@ class Main:
                 self.eventhandler.handle_event(event)
             self.update_screen()  # update the sreen
             pygame.display.flip()  # Flip the display
-            #self.my_robot.run()  # move the game forward
+            self.my_robot.run()  # move the game forward
         pygame.quit()  # Done! Time to quit.
 
 
