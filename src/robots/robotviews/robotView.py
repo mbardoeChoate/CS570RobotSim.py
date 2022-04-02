@@ -1,7 +1,7 @@
 import math
 import pygame
 from pygame.locals import *
-from src.etc.constants import my_px
+from src.etc.constants import my_px, inch
 
 
 class RobotView(pygame.sprite.Sprite):
@@ -26,17 +26,18 @@ class RobotView(pygame.sprite.Sprite):
     def create_Image(self):
         # Pass in the color of the car, and its x and y position, width and height.
         # Set the background color and set it to be transparent
-        self.surf = pygame.Surface([self.robot.width.asNumber(my_px) + 20, self.robot.height.asNumber(my_px)])
+        self.surf = pygame.Surface([self.robot.width.asNumber(my_px), self.robot.height.asNumber(my_px)])
         self.surf = self.surf.convert_alpha()
         self.surf.fill((0, 0, 0, 0))
-        self.RobotBody = pygame.draw.rect(self.surf, self.color, Rect(10, 0, self.robot.width.asNumber(my_px),
+        self.RobotBody = pygame.draw.rect(self.surf, self.color, Rect(0, 0, self.robot.width.asNumber(my_px),
                                                                       self.robot.height.asNumber(my_px)))
-        self.left_front_wheel = pygame.draw.rect(self.surf, (0, 255, 0), Rect(0, 3, 10, 3))
-        self.right_front_wheel = pygame.draw.rect(self.surf, (0, 255, 0),
-                                                  Rect(self.robot.width.asNumber(my_px) + 10, 3, 10, 3))
-        self.left_back_wheel = pygame.draw.rect(self.surf, (0, 255, 0),
-                                                Rect(0, self.robot.height.asNumber(my_px) - 3, 10, 3))
-        self.right_back_wheel = pygame.draw.rect(self.surf, (0, 255, 0), Rect(self.robot.width.asNumber(my_px) + 10,
-                                                                              self.robot.height.asNumber(my_px) - 3, 10,
-                                                                              3))
-        self.surf = pygame.transform.rotate(self.surf, self.robot.direction * 180.0 / math.pi)
+        # self.left_front_wheel = pygame.draw.rect(self.surf, (0, 255, 0), Rect(0, 3, 10, 3))
+        # self.right_front_wheel = pygame.draw.rect(self.surf, (0, 255, 0),
+        #                                          Rect(self.robot.width.asNumber(my_px) + 10, 3, 10, 3))
+        # self.left_back_wheel = pygame.draw.rect(self.surf, (0, 255, 0),
+        #                                        Rect(0, self.robot.height.asNumber(my_px) - 3, 10, 3))
+        # self.right_back_wheel = pygame.draw.rect(self.surf, (0, 255, 0), Rect(self.robot.width.asNumber(my_px) + 10,
+        #                                                                      self.robot.height.asNumber(my_px) - 3, 10,
+        #                                                                      3))
+        self.surf = pygame.transform.rotate(self.surf,
+                                            -self.robot.drivetrain.pose.rotation().radians() * 180.0 / math.pi)

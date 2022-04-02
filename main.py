@@ -1,13 +1,21 @@
+import math
+
 import pygame
 from src.robots import robot
 from src.robots import tankrobot
+from src.drivetrains.tankdrivetrain import TankDriveTrain
 from src.robots.robotviews import robotView
 from src.etc.eventhandler import EventHandler
 from src.etc.constants import WIDTH_2022, HEIGHT_2022
 from src.fields.field_2022 import Field_2022
 from src.fields.field import Field
-from src.etc.constants import FPS
+from src.etc.constants import FPS, inch
+from unum.units import cm, rad, deg
 
+
+######
+# Note: wpilib is oriented so that the angle is the in the x direction
+#
 
 class Main:
 
@@ -38,17 +46,20 @@ class Main:
         self.field.draw_background()
 
     def add_robot(self):
-        self.my_robot = tankrobot.TankRobot(40, 40, 1, (200, 100))
-        self.my_robot.set_motor_voltage(0, -.7)
-        self.my_robot.set_motor_voltage(1, -0.25)
+        self.my_robot = tankrobot.TankRobot(40 * 2.54 * cm, 40 * 2.54 * cm, math.pi * rad, (200, 100))
+        self.drivetrain = TankDriveTrain(1, (200, 100))
+        self.my_robot.add_drivetrain(self.drivetrain)
+        self.my_robot.set_motor_voltage(0, 1)
+        self.my_robot.set_motor_voltage(1, 1)
         self.my_robotView = robotView.RobotView(self.field.screen, (255, 125, 255), self.my_robot)
 
     def update_screen(self):
         self.screen.blit(self.field.screen, (0, 0))
         self.my_robotView.create_Image()
         # rotSurf = pygame.transform.rotate(Player.surf, Player.angle)
+        transformed_position = (self.drivetrain.pose.X(), self.drivetrain.pose.Y())
         self.screen.blit(self.my_robotView.surf,
-                         self.my_robotView.surf.get_rect(center=self.my_robot.get_surface_position()))
+                         self.my_robotView.surf.get_rect(center=transformed_position))
 
     def run(self):
         self.clock = pygame.time.Clock()

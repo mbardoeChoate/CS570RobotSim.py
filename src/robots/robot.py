@@ -3,15 +3,13 @@ from unum.units import cm
 
 class Robot(object):
 
-    def __init__(self, width, height, direction, position):
-        self.width = width * cm
-        self.height = height * cm
-        self.direction = direction  # direction in radians 0 is up
-        self.center_position = (position[0] * cm, position[1] * cm)
-        self.left_front_wheel = Wheel(4)
-        self.left_back_wheel = Wheel(4)
-        self.right_front_wheel = Wheel(4)
-        self.right_back_wheel = Wheel(4)
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        # self.left_front_wheel = Wheel(4)
+        # self.left_back_wheel = Wheel(4)
+        # self.right_front_wheel = Wheel(4)
+        # self.right_back_wheel = Wheel(4)
         self.drivetrain = None
 
     def add_drivetrain(self, drivetrain):
@@ -21,7 +19,7 @@ class Robot(object):
         self.drivetrain.motors[motor_num].set_voltage(value)
 
     def get_surface_position(self):
-        return (self.center_position[0].asNumber(cm), self.center_position[1].asNumber(cm))
+        return (self.drivetrain.pose.X().asNumber(m), self.drivetrain.pose.Y().asNumber(cm))
 
     def run(self):
         '''You must create a drivetrain.'''

@@ -1,5 +1,5 @@
 from unum.units import cm
-from pygame import display, image
+from pygame import display, image, Surface
 from unum import Unum
 
 
@@ -9,7 +9,7 @@ class Field:
 
     def __init__(self, width, height, distance_conversion):
         super().__init__()
-        self.screen = display.set_mode([width, height])
+        self.screen = Surface([width, height])
         display.set_caption("CS570 Robot Sim")
         self.distance_conversion = Unum.unit("mypx", 1 / distance_conversion * cm)
         display.update()

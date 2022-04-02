@@ -1,14 +1,19 @@
 from src.robots.robotparts.motor import Motor
 from src.robots.robotparts.wheel import Wheel
-from unum.units import cm
+from unum.units import cm, m
+from wpimath.kinematics import DifferentialDriveOdometry
+from wpimath.geometry import Pose2d, Rotation2d
 
 
 class Drivetrain():
     motors = []
     wheels = []
 
-    def __init__(self, num_motors, drive_base, wheel_cirumference):
+    def __init__(self, num_motors, drive_base, wheel_cirumference, direction, position):
         super(Drivetrain, self).__init__()
+        # self.direction = direction  # direction in radians 0 is up
+        # self.center_position = (position[0] * cm, position[1] * cm)
+        self.pose = Pose2d(x=position[1], y=position[0], angle=-direction)
         self.num_motors = num_motors
         for i in range(num_motors):
             self.motors.append(Motor())

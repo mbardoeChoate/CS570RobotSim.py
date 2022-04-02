@@ -1,9 +1,8 @@
 from unum import Unum
 from unum.units import cm
 from pygame import image
-
-inch = Unum.unit("inch", 2.54 * cm)
 from src.fields.field import Field
+from src.etc.constants import inch
 
 
 class Field_2022(Field):
