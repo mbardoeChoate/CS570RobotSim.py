@@ -6,10 +6,6 @@ class Robot(object):
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        # self.left_front_wheel = Wheel(4)
-        # self.left_back_wheel = Wheel(4)
-        # self.right_front_wheel = Wheel(4)
-        # self.right_back_wheel = Wheel(4)
         self.drivetrain = None
 
     def add_drivetrain(self, drivetrain):

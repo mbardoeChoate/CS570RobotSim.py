@@ -11,8 +11,6 @@ class Drivetrain():
 
     def __init__(self, num_motors, drive_base, wheel_cirumference, direction, position):
         super(Drivetrain, self).__init__()
-        # self.direction = direction  # direction in radians 0 is up
-        # self.center_position = (position[0] * cm, position[1] * cm)
         self.pose = Pose2d(x=position[1], y=position[0], angle=-direction)
         self.num_motors = num_motors
         for i in range(num_motors):
